@@ -1,3 +1,11 @@
-<h1>Bienvenidos a Hispanistation 13</h1>
-
-SERVIDOR DE PRUEBAS EN EL CODIGO VG
+<h1>Welcome to NSS CASTRO!</h1>
+<br>
+<i>HISPANISTATION CON MINISTATION HA VUELTO, HOME OF THE GRIEF SINCE 2013</i>
+<br>
+Canal de Discord: https://discord.gg/HgugjxV
+Normas: http://hispanistation.enjin.com/normas
+Wiki: http://ss13.moe/wiki/index.php/Main_Page
+<br>
+Estamos usando el código de /vg/station el cual es un TG con esteroides, disfrutad!
+<br>
+También estamos probando ministation devuelta, necesitaremos que reporten cualquier anomalia en el mapa para corregirla.
