@@ -1,0 +1,30 @@
+STATLOG_START|1.1|Ministation|2017.01.24.01.11.31|2017.01.24.18.36.51
+MASTERMODE|extended
+GAMEMODE|extended
+TECH_TOTAL|0
+BLOOD_SPILLED|429.937
+CRATES_ORDERED|0
+ARTIFACTS_DISCOVERED|0
+CREWSCORE|4728
+ESCAPEES|0
+NUKED|0
+MOB_DEATH|/mob/living/carbon/human|null|3093.340087890625||195|42|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094||194|40|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094||197|39|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094.330078125||71|93|2|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094.330078125||204|196|4|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094.659912109375||105|23|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3094.659912109375||194|167|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3095.320068359375||201|172|3|null|unknown
+MOB_DEATH|/mob/living/carbon/human|null|3095.320068359375||0|0|0|null|unknown
+MOB_DEATH|/mob/living/carbon/monkey|null|24166.48046875|Estereotipo McRacismo|130|100|1|null|Pun Pun (507)
+MOB_DEATH|/mob/living/carbon/monkey|null|43353.01171875|Estereotipo McRacismo|141|105|1|null|monkey (858)
+MOB_DEATH|/mob/living/carbon/human|null|46453.03125|Estereotipo McRacismo|105|115|1|promethtk11|Cassian Ulery
+MOB_DEATH|/mob/living/carbon/human|null|62393.01953125|Estereotipo McRacismo|108|140|1|deepinsideme|Estereotipo McRacismo
+MOB_DEATH|/mob/living/carbon/human|null|75168.640625|Estereotipo McRacismo|117|93|1|promethtk11|Cassian Ulery
+CULTSTATS|0|0|0|0|0|0|0|0|0
+XENOSTATS|0|0|0
+BLOBSTATS|0|0|0|0
+MALFSTATS|0|0|0
+REVSQUADSTATS|0|2
+WRITE_COMPLETE
