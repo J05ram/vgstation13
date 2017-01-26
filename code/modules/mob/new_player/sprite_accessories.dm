@@ -334,11 +334,6 @@
 		icon_state = "hair_poofy"
 		gender = FEMALE
 
-	poofy2
-		name = "Poofy 2"
-		icon_state = "hair_poofy2"
-		gender = FEMALE
-
 	crono
 		name = "Toriyama"
 		icon_state = "hair_toriyama"
