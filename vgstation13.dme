@@ -2108,7 +2108,7 @@
 #include "interface\web\interface.dms"
 #include "maprendering\maprendering.dm"
 #include "maps\_map.dm"
-#include "maps\ministation.dm"
+#include "maps\taxistation.dm"
 #include "maps\defficiency\areas.dm"
 #include "maps\defficiency\pipes.dm"
 #include "maps\randomvaults\dance_revolution.dm"
