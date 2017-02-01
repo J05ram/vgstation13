@@ -1171,7 +1171,6 @@
 		B.air_contents.update_values()
 		B.air_contents.react()
 	qdel(src)
-	return B
 
 /obj/item/toy/balloon/inflated
 	desc = "An inflated balloon. You have an urge to pop it."
@@ -1297,6 +1296,7 @@
 			user.put_in_hands(A)
 		else
 			new /obj/item/clothing/gloves/anchor_arms(get_turf(src.loc))
+<<<<<<< HEAD
 		qdel(src)
 
 /obj/item/toy/balloon/decoy
@@ -1522,3 +1522,6 @@ var/list/living_balloons = list()
 	B.name = name
 	B.air_contents = air_contents
 	qdel(src)
+=======
+		qdel(src)
+>>>>>>> parent of 2d21834... Decoy Balloons (#13660)
