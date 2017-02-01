@@ -1296,7 +1296,6 @@
 			user.put_in_hands(A)
 		else
 			new /obj/item/clothing/gloves/anchor_arms(get_turf(src.loc))
-<<<<<<< HEAD
 		qdel(src)
 
 /obj/item/toy/balloon/decoy
