@@ -1328,10 +1328,6 @@
 		return
 	user.drop_item(D, force_drop = 1)
 	D.appearance = user.appearance
-	var/datum/log/L = new
-	user.examine(L)
-	D.desc = L.log
-	qdel(L)
 	if(decoy_phrase)
 		D.decoy_phrase = decoy_phrase
 
