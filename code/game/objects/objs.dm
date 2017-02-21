@@ -37,6 +37,8 @@ var/global/list/reagents_to_log = list(FUEL, PLASMA, PACID, SACID, AMUTATIONTOXI
 	// Can we wrench/weld this to a turf with a dense /obj on it?
 	var/can_affix_to_dense_turf=0
 
+	var/has_been_invisible_sprayed = FALSE
+
 /obj/New()
 	..()
 	if (auto_holomap && isturf(loc))
@@ -558,3 +560,11 @@ a {
 		forceMove(current_loc)
 	else
 		forceMove(current_turf)
+
+/obj/send_to_past(var/duration)
+	..()
+	var/static/list/resettable_vars = list(
+		"sharpness",
+		"integratedpai")
+
+	reset_vars_after_duration(resettable_vars, duration)

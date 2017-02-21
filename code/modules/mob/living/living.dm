@@ -908,7 +908,33 @@ Thanks.
 		//unbuckling yourself
 		if(istype(L.locked_to, /obj/structure/bed))
 			var/obj/structure/bed/B = L.locked_to
-			if(iscarbon(L))
+			if(istype(B, /obj/structure/bed/guillotine))
+				var/obj/structure/bed/guillotine/G = B
+				if(G.open)
+					G.manual_unbuckle(L)
+				else
+					L.delayNextAttack(100)
+					L.delayNextSpecial(100)
+					L.visible_message("<span class='warning'>\The [L] attempts to dislodge \the [G]'s stocks!</span>",
+									  "<span class='warning'>You attempt to dislodge \the [G]'s stocks (this will take around thirty seconds).</span>",
+									  self_drugged_message="<span class='warning'>You attempt to chew through the wooden stocks of \the [G] (this will take a while).</span>")
+					spawn(0)
+						if(do_after(usr, usr, 300))
+							if(!L.locked_to)
+								return
+							L.visible_message("<span class='danger'>\The [L] dislodges \the [G]'s stocks and climbs out of \the [src]!</span>",\
+								"<span class='notice'>You dislodge \the [G]'s stocks and climb out of \the [G].</span>",\
+								self_drugged_message="<span class='notice'>You successfully chew through the wooden stocks.</span>")
+							G.open = TRUE
+							G.manual_unbuckle(L)
+							G.update_icon()
+							G.verbs -= /obj/structure/bed/guillotine/verb/open_stocks
+							G.verbs += /obj/structure/bed/guillotine/verb/close_stocks
+						else
+							L.simple_message("<span class='warning'>Your escape attempt was interrupted.</span>", \
+								"<span class='warning'>Your chewing was interrupted. Damn it!</span>")
+
+			else if(iscarbon(L))
 				var/mob/living/carbon/C = L
 				if(C.handcuffed)
 					C.delayNextAttack(100)
@@ -1476,3 +1502,60 @@ Thanks.
 		// flick("e_flash", flash)
 		overlay_fullscreen("flash", type)
 		return 1
+
+/mob/living/proc/advanced_mutate()
+	color = list(rand(),rand(),rand(),0,
+				rand(),rand(),rand(),0,
+				rand(),rand(),rand(),0,
+				0,0,0,1,
+				0,0,0,0)
+	if(prob(5))
+		eye_blind = rand(0,100)
+	if(prob(10))
+		eye_blurry = rand(0,100)
+	if(prob(5))
+		ear_deaf = rand(0,100)
+	brute_damage_modifier += rand(-5,5)/10
+	burn_damage_modifier += rand(-5,5)/10
+	tox_damage_modifier += rand(-5,5)/10
+	oxy_damage_modifier += rand(-5,5)/10
+	clone_damage_modifier += rand(-5,5)/10
+	brain_damage_modifier += rand(-5,5)/10
+	hal_damage_modifier += rand(-5,5)/10
+
+	movement_speed_modifier += rand(-9,9)/10
+	if(prob(1))
+		universal_speak = !universal_speak
+	if(prob(1))
+		universal_understand = !universal_understand
+
+	maxHealth = rand(50,200)
+	meat_type = pick(typesof(/obj/item/weapon/reagent_containers/food/snacks/meat))
+	if(prob(5))
+		cap_calorie_burning_bodytemp = !cap_calorie_burning_bodytemp
+	if(prob(10))
+		calorie_burning_heat_multiplier += rand(-5,5)/10
+	if(prob(10))
+		thermal_loss_multiplier += rand(-5,5)/10
+
+/mob/living/send_to_past(var/duration)
+	..()
+	var/static/list/resettable_vars = list(
+		"maxHealth",
+		"health",
+		"bruteloss",
+		"oxyloss",
+		"toxloss",
+		"fireloss",
+		"cloneloss",
+		"brainloss",
+		"halloss",
+		"hallucination",
+		"meat_taken",
+		"on_fire",
+		"fire_stacks",
+		"specialsauce",
+		"silent",
+		"is_ventcrawling")
+
+	reset_vars_after_duration(resettable_vars, duration)
