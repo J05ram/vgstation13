@@ -30,12 +30,12 @@
 		var/mob/living/carbon/Ca = src
 		Ca.dropBorers(1)//sanity checking for borers that haven't been qdel'd yet
 	if(client)
-		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
+		for(var/obj/abstract/screen/movable/spell_master/spell_master in spell_masters)
 			returnToPool(spell_master)
 		spell_masters = null
 		remove_screen_objs()
 		for(var/atom/movable/AM in client.screen)
-			var/obj/screen/screenobj = AM
+			var/obj/abstract/screen/screenobj = AM
 			if(istype(screenobj))
 				if(!screenobj.globalscreen) //Screens taken care of in other places or used by multiple people
 					returnToPool(AM)
@@ -72,6 +72,9 @@
 	if(transmogged_from)
 		qdel(transmogged_from)
 		transmogged_from = null
+	if(transmogged_to)
+		qdel(transmogged_to)
+		transmogged_to = null
 
 	..()
 
@@ -219,13 +222,6 @@
 		if(client)
 			client.screen -= zone_sel
 		zone_sel = null
-	if(hud_used)
-		for(var/obj/screen/item_action/actionitem in hud_used.item_action_list)
-			if(client)
-				client.screen -= actionitem
-				client.images -= actionitem.overlay
-			returnToPool(actionitem)
-			hud_used.item_action_list -= actionitem
 
 /mob/proc/cultify()
 	return
@@ -421,7 +417,7 @@
 	if(timestopped)
 		return 0 //under effects of time magick
 	if(spell_masters && spell_masters.len)
-		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
+		for(var/obj/abstract/screen/movable/spell_master/spell_master in spell_masters)
 			spell_master.update_spells(0, src)
 	return
 
@@ -958,7 +954,7 @@ var/list/slot_equipment_priority = list( \
 	if (ismob(AM))
 		var/mob/M = AM
 		if (M.locked_to) //If the mob is locked_to on something, let's just try to pull the thing they're locked_to to for convenience's sake.
-			P = M.locked_to
+			P = M.locked_to		
 
 	if (!P.anchored)
 		P.add_fingerprint(src)
@@ -980,6 +976,13 @@ var/list/slot_equipment_priority = list( \
 				M.LAssailant = null
 			else
 				M.LAssailant = usr
+				/*if(ishuman(AM))
+					var/mob/living/carbon/human/HM = AM
+					if (HM.drag_damage()) 
+						if (HM.isincrit())
+							to_chat(usr,"<span class='warning'>Pulling \the [HM] in their current condition would probably be a bad idea.</span>")
+							add_logs(src, HM, "started dragging critically wounded", admin = (HM.ckey))*/
+// Commented out till I can figure out how to fix people still pulling when they're pulled --snx
 
 /mob/verb/stop_pulling()
 	set name = "Stop Pulling"
@@ -1279,27 +1282,27 @@ var/list/slot_equipment_priority = list( \
 			var/mob/living/carbon/human/H = M
 			H.handle_regular_hud_updates()
 
+// http://www.byond.com/forum/?post=2219001#comment22205313
+// TODO: Clean up and identify the args, document
+/mob/verb/DisableClick(argu = null as anything, sec = "" as text, number1 = 0 as num, number2 = 0 as num)
+	set name = ".click"
+	set category = null
+	return
+
+/mob/verb/DisableDblClick(argu = null as anything, sec = "" as text, number1 = 0 as num, number2 = 0 as num)
+	set name = ".dblclick"
+	set category = null
+	return
+
 /mob/Topic(href,href_list[])
 	if(href_list["mach_close"])
 		var/t1 = text("window=[href_list["mach_close"]]")
 		unset_machine()
 		src << browse(null, t1)
-	if (href_list["joinresponseteam"])
-		if(usr.client)
-			var/client/C = usr.client
-			C.JoinResponseTeam()
-
-/mob/proc/pull_damage()
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		if(H.health - H.halloss <= config.health_threshold_softcrit)
-			for(var/name in H.organs_by_name)
-				var/datum/organ/external/e = H.organs_by_name[name]
-				if(H.lying)
-					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
-						return 1
-						break
-		return 0
+	//if (href_list["joinresponseteam"])
+	//	if(usr.client)
+	//		var/client/C = usr.client
+	//		C.JoinResponseTeam()
 
 /mob/MouseDrop(mob/M as mob)
 	..()
@@ -1734,6 +1737,21 @@ mob/proc/on_foot()
 /mob/proc/nuke_act() //Called when caught in a nuclear blast
 	return
 
+/mob/supermatter_act(atom/source, severity)
+	var/contents = get_contents_in_object(src)
+
+	var/obj/item/supermatter_shielding/SS = locate(/obj/item/supermatter_shielding) in contents
+	if(SS)
+		SS.supermatter_act(source)
+	else
+
+		if(severity == SUPERMATTER_DUST)
+			dust()
+			return 1
+		else
+			qdel(src)
+			return 1
+
 /mob/proc/remove_jitter()
 	if(jitteriness)
 		jitteriness = 0
@@ -1774,7 +1792,7 @@ mob/proc/on_foot()
 	var/init_blinded = blinded
 	var/init_eye_blind = eye_blind
 	var/init_deaf = ear_deaf
-	overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+	overlay_fullscreen("blind", /obj/abstract/screen/fullscreen/blind)
 	blinded = 1
 	eye_blind = 1
 	ear_deaf = 1
@@ -1851,17 +1869,21 @@ mob/proc/on_foot()
 				var/mob/living/carbon/C = transmogged_from
 				if(istype(C.get_item_by_slot(slot_wear_mask), /obj/item/clothing/mask/morphing))
 					C.drop_item(C.wear_mask, force_drop = 1)
+			var/mob/returned_mob = transmogged_from
+			returned_mob.transmogged_to = null
 			transmogged_from = null
 			for(var/atom/movable/AM in contents)
 				AM.forceMove(get_turf(src))
 			forceMove(null)
 			qdel(src)
+			return returned_mob
 		return
 	if(!ispath(target_type, /mob))
 		EXCEPTION(target_type)
 		return
 	var/mob/M = new target_type(loc)
 	M.transmogged_from = src
+	transmogged_to = M
 	if(key)
 		M.key = key
 	if(offer_revert_spell)
@@ -1872,6 +1894,7 @@ mob/proc/on_foot()
 		/obj/item/weapon/holder,
 		/obj/item/device/paicard,
 		/obj/item/device/soulstone,
+		/obj/item/device/mmi,
 		)
 	for(var/i in drop_on_transmog)
 		var/list/L = search_contents_for(i)
@@ -1880,10 +1903,12 @@ mob/proc/on_foot()
 				drop_item(A, force_drop = 1)
 	src.forceMove(null)
 	timestopped = 1
+	return M
 
 /spell/aoe_turf/revert_form
 	name = "Revert Form"
 	desc = "Morph back into your previous form."
+	spell_flags = GHOSTCAST
 	abbreviation = "RF"
 	charge_max = 1
 	invocation = "none"
@@ -1894,6 +1919,9 @@ mob/proc/on_foot()
 /spell/aoe_turf/revert_form/cast(var/list/targets, mob/user)
 	user.transmogrify()
 	user.remove_spell(src)
+
+/mob/attack_icon()
+	return image(icon = 'icons/mob/attackanims.dmi', icon_state = "default")
 
 #undef MOB_SPACEDRUGS_HALLUCINATING
 #undef MOB_MINDBREAKER_HALLUCINATING

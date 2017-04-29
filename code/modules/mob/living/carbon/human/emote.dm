@@ -101,7 +101,7 @@
 
 		if ("choke")
 			if(miming)
-				msg = "<B>[src]</B> clutches his throat desperately!"
+				msg = "<B>[src]</B> clutches \his throat desperately!"
 				m_type = VISIBLE
 			else
 				if (!muzzled)
@@ -234,8 +234,8 @@
 			if(M_ELVIS in mutations)
 				src.emote("fart")
 				msg = "<B>[src]</B> has left the building..."
-			if(M_HARDCORE in mutations)
-				msg = "<B>[src]</B> whispers with his final breath, <i>'i told u i was hardcore..'</i>"
+			if(!miming && (M_HARDCORE in mutations))
+				msg = "<B>[src]</B> whispers with \his final breath, <i>'i told u i was hardcore..'</i>"
 			else
 				if(isgolem(src))
 					msg = "<B>[src]</B> crumbles into dust..."

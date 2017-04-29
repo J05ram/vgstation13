@@ -229,7 +229,7 @@
 	name = "Blood"
 	id = BLOOD
 	reagent_state = LIQUID
-	color = "#a00000" //rgb: 160, 0, 0
+	color = DEFAULT_BLOOD //rgb: 161, 8, 8
 
 	data = new/list("donor"= null, "viruses" = null, "blood_DNA" = null, "blood_type" = null, \
 	"blood_colour" = DEFAULT_BLOOD, "resistances" = null, "trace_chem" = null, "antibodies" = null)
@@ -291,17 +291,20 @@
 
 	if(volume < 3) //Hardcoded
 		return
+//	WHY WAS THIS MAKING 2 SPLATTERS? Awfully hardcoded, no need to exist, and this is completely broken colorwise
+//
 	//var/datum/disease/D = self.data["virus"]
-	if(!self.data["donor"] || ishuman(self.data["donor"]))
-		var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //Find some blood here
-		if(!blood_prop) //First blood
-			blood_prop = getFromPool(/obj/effect/decal/cleanable/blood, T)
-			blood_prop.New(T)
-			blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
-
-		for(var/datum/disease/D in self.data["viruses"])
-			var/datum/disease/newVirus = D.Copy(1)
-			blood_prop.viruses += newVirus
+//	if(!self.data["donor"] || ishuman(self.data["donor"]))
+//		var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //Find some blood here
+//		if(!blood_prop) //First blood
+//			blood_prop = getFromPool(/obj/effect/decal/cleanable/blood, T)
+//			blood_prop.New(T)
+//			blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
+//
+//		for(var/datum/disease/D in self.data["viruses"])
+//			var/datum/disease/newVirus = D.Copy(1)
+//			blood_prop.viruses += newVirus
+//
 
 	if(!self.data["donor"] || ishuman(self.data["donor"]))
 		blood_splatter(T, self, 1)
@@ -442,7 +445,7 @@
 	if(volume >= 3) //Hardcoded
 		T.wet(800)
 
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/effect/fire) in T)
 	if(hotspot)
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles())
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
@@ -3438,7 +3441,7 @@
 
 	if(volume >= 3)
 		T.wet(800)
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/effect/fire) in T)
 	if(hotspot)
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles())
 		lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2), 0)
@@ -5455,6 +5458,34 @@ var/global/list/tonio_doesnt_remove=list("tonio", "blood")
 		if(H.species.name == "Vox")
 			M.adjustToxLoss(-4 * REM) //chicken and gravy just go together
 
+/datum/reagent/cheesygloop
+	name = "Cheesy Gloop"
+	id = CHEESYGLOOP
+	description = "This fatty, viscous substance is found only within the cheesiest of cheeses. Has the potential to cause heart stoppage."
+	reagent_state = SOLID
+	color = "#FFFF00" //rgb: 255, 255, 0
+	overdose = 5
+	custom_metabolism = 0 //does not leave your body, clogs your arteries! puke or otherwise clear your system ASAP
+
+/datum/reagent/maplesyrup
+	name = "Maple Syrup"
+	id = MAPLESYRUP
+	description = "Reddish brown Canadian maple syrup, perfectly sweet and thick. Nutritious and effective at healing."
+	color = "#7C1C04"
+	alpha = 200
+	nutriment_factor = 20 * REAGENTS_METABOLISM
+
+/datum/reagent/maplesyrup/on_mob_life(var/mob/living/M)
+
+	if(..())
+		return 1
+
+	M.nutrition += nutriment_factor
+	M.adjustOxyLoss(-2 * REM)
+	M.adjustToxLoss(-2 * REM)
+	M.adjustBruteLoss(-3 * REM)
+	M.adjustFireLoss(-3 * REM)
+
 /datum/reagent/blockizine
 	name = "Blockizine"
 	id = BLOCKIZINE
@@ -5477,7 +5508,7 @@ var/global/list/tonio_doesnt_remove=list("tonio", "blood")
 		volume = holder.maximum_volume
 		holder.update_total()
 
-datum/reagent/fishbleach
+/datum/reagent/fishbleach
 	name = "Fish Bleach"
 	id = FISHBLEACH
 	description = "Just looking at this liquid makes you feel tranquil and peaceful. You aren't sure if you want to drink any however."
@@ -5489,3 +5520,24 @@ datum/reagent/fishbleach
 		return 1
 	H.color = "#12A7C9"
 	return
+
+/datum/reagent/roach_shell
+	name = "Cockroach chitin"
+	id = ROACHSHELL
+	description = "Looks like somebody's been shelling peanuts."
+	reagent_state = SOLID
+	color = "#8B4513"
+
+/datum/reagent/ethanol/deadrum/greyvodka
+	name = "Greyshirt vodka"
+	id = GREYVODKA
+	description = "Made presumably from whatever scrapings you can get out of maintenance. Don't think, just drink."
+	reagent_state = LIQUID
+	color = "#DEF7F5"
+	alpha = 64
+
+/datum/reagent/ethanol/deadrum/greyvodka/on_mob_life(var/mob/living/carbon/human/H)
+	if(..())
+		return 1
+	H.radiation = max(H.radiation - 5 * REM, 0)
+	H.rad_tick = max(H.rad_tick - 3 * REM, 0)

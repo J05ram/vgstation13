@@ -1124,6 +1124,19 @@
 	..()
 	reagents.add_reagent(LIMEJUICE, 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/greyvodka
+	name = "Greyshirt vodka"
+	desc = "Experts spent a long time squatting around a mixing bench to bring you this."
+	icon_state = "grey_vodka"
+	vending_cat = "spirits"
+	starting_materials = null
+	isGlass = 1
+	molotov = -1
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/greyvodka/New()
+	..()
+	reagents.add_reagent(GREYVODKA, 100)
+
 
 
 
@@ -1233,6 +1246,10 @@
 		light(user,I)
 		update_brightness(user)
 		return
+	else if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/donut))
+		if(reagents.total_volume)
+			var/obj/item/weapon/reagent_containers/food/snacks/donut/D = I
+			D.dip(src, user)
 
 /obj/item/weapon/reagent_containers/food/drinks/proc/light(mob/user,obj/item/I)
 	var/flavor_text = "<span  class='rose'>[user] lights \the [name] with \the [I].</span>"

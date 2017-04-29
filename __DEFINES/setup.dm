@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-#if DM_VERSION < 510
-#error Your version of byond is too old, you need version 510 or higher
+#if DM_VERSION < 511
+#error Your version of byond is too old, you need version 511 or higher
 #endif
 #define RUNWARNING // disable if they re-enable run() in 507 or newer.
                    // They did, tested in 508.1296 - N3X
@@ -129,6 +129,7 @@ var/global/disable_vents     = 0
 #define GLOVES_HEAT_CONDUCTIVITY		0.4	//For normal gloves.
 #define INS_GLOVES_HEAT_CONDUCTIVITY	0.2	//For some heat insulated gloves (black and yellow.)
 
+#define SNOWGEAR_HEAT_CONDUCTIVITY 		0.2	// for now
 #define SPACESUIT_HEAT_CONDUCTIVITY		0	// until a time where space is no longer cold
 
 // Doors!
@@ -455,6 +456,7 @@ var/global/list/BODY_COVER_VALUE_LIST=list("[HEAD]" = COVER_PROTECTION_HEAD,"[EY
 #define DISABILITY_FLAG_EPILEPTIC   4
 #define DISABILITY_FLAG_DEAF        8
 #define DISABILITY_FLAG_BLIND       16
+#define DISABILITY_FLAG_MUTE		32
 
 ///////////////////////////////////////
 // MUTATIONS
@@ -967,6 +969,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define REQUIRE_LIGHT 128
 #define HYPOTHERMIA_IMMUNE 256
 #define PLASMA_IMMUNE 512
+#define RAD_GLOW 1024
 
 //Species anatomical flags.
 #define HAS_SKIN_TONE 1
@@ -1293,7 +1296,7 @@ var/default_colour_matrix = list(1,0,0,0,\
 #define GLOBALCAST -2
 
 //buying costs
-#define Sp_BASE_PRICE 5
+#define Sp_BASE_PRICE 20
 
 ///////WIZ END/////////
 
@@ -1580,3 +1583,12 @@ var/proccalls = 1
 #define HOLOMAP_MARKER_SYNDISHUTTLE		"syndishuttle"
 
 #define DEFAULT_BLOOD "#A10808"
+
+//Return values for /obj/machinery/proc/npc_tamper_act(mob/living/L)
+#define NPC_TAMPER_ACT_FORGET 1 //Don't try to tamper with this again
+#define NPC_TAMPER_ACT_NOMSG  2 //Don't produce a visible message
+
+//Changing the order of these needlessly will break functionality of the client holding lists
+#define NO_ANIMATION 0
+#define ITEM_ANIMATION 1
+#define PERSON_ANIMATION 2
