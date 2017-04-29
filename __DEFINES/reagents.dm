@@ -315,6 +315,10 @@
 #define SANGRIA			"sangria"
 #define BLOCKIZINE		"blockizine"
 #define FISHBLEACH		"fishbleach"
+#define CHEESYGLOOP		"cheesy_gloop"
+#define MAPLESYRUP		"maple_syrup"
+#define ROACHSHELL		"roach_shell"
+#define GREYVODKA		"grey_vodka"
 
 #define TUNGSTEN 			"tungsten"
 #define LITHIUMSODIUMTUNGSTATE 			"lithiumsodiumtungstate"
@@ -333,6 +337,6 @@
 
 //Pulse related bullshit
 var/list/tachycardics = list(COFFEE, INAPROVALINE, HYPERZINE, NITROGLYCERIN, THIRTEENLOKO, NICOTINE)	//increase heart rate
-var/list/bradycardics = list(NEUROTOXIN, CRYOXADONE, CLONEXADONE, SPACE_DRUGS, STOXIN)					//decrease heart rate
+var/list/bradycardics = list(NEUROTOXIN, CRYOXADONE, CLONEXADONE, SPACE_DRUGS, STOXIN, GREYVODKA)					//decrease heart rate
 var/list/heartstopper = list(/*"potassium_phorochloride",*/ ZOMBIEPOWDER) //this stops the heart
-var/list/cheartstopper = list(/*"potassium_chloride"*/) //this stops the heart when overdose is met -- c = conditional
+var/list/cheartstopper = list(/*"potassium_chloride",*/ CHEESYGLOOP) //this stops the heart when overdose is met -- c = conditional

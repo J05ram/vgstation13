@@ -76,9 +76,10 @@
 	if (flags & INVULNERABLE)
 		bodytemperature = initial(bodytemperature)
 	if (monkeyizing)
-		return
+		return 0
 	if(!loc)
-		return	// Fixing a null error that occurs when the mob isn't found in the world -- TLE
+		return 0	// Fixing a null error that occurs when the mob isn't found in the world -- TLE
+	// Why the fuck is this handled here?
 	if(reagents && reagents.has_reagent(BUSTANUT))
 		if(!(M_HARDCORE in mutations))
 			mutations.Add(M_HARDCORE)
@@ -99,7 +100,7 @@
 	if(mind)
 		if(mind in ticker.mode.implanted)
 			if(implanting)
-				return
+				return 0
 //			to_chat(world, "[src.name]")
 			var/datum/mind/head = ticker.mode.implanted[mind]
 			//var/list/removal
@@ -115,6 +116,7 @@
 					special_role = null
 					to_chat(current, "<span class='danger'><FONT size = 3>The fog clouding your mind clears. You remember nothing from the moment you were implanted until now..(You don't remember who enslaved you)</FONT></span>")
 				*/
+	return 1
 
 // Apply connect damage
 /mob/living/beam_connect(var/obj/effect/beam/B)
@@ -534,6 +536,7 @@ Thanks.
 	germ_level = 0
 	next_pain_time = 0
 	radiation = 0
+	rad_tick = 0
 	nutrition = 400
 	bodytemperature = 310
 	sdisabilities = 0
@@ -701,6 +704,40 @@ Thanks.
 							pulling.Move(T, get_dir(pulling, T))
 							if(M && secondarypull)
 								M.start_pulling(secondarypull)
+							/* Drag damage is here!*/	
+							var/mob/living/carbon/human/HM = M
+							var/list/damaged_organs = HM.drag_damage()
+							if (damaged_organs)
+								if(!HM.isincrit() && damaged_organs.len)
+									if(prob(HM.getBruteLoss() / 5)) //Chance to damage
+										for(var/datum/organ/external/damagedorgan in damaged_organs)
+											if((damagedorgan.brute_dam) < damagedorgan.max_damage)
+												HM.apply_damage(2, BRUTE, damagedorgan)
+												HM.visible_message("<span class='warning'>The wounds on \the [HM]'s [damagedorgan.display_name] worsen from being dragged!</span>")
+												HM.UpdateDamageIcon()
+									if(prob(HM.getBruteLoss() / 8)) //Chance to bleed
+										blood_splatter(HM.loc,HM)
+										var/blood_volume = round(HM:vessel.get_reagent_amount("blood"))
+										if(blood_volume > 0)
+											HM:vessel.remove_reagent("blood",4)
+											HM.visible_message("<span class='warning'>\The [HM] loses some blood from being dragged!</span>")
+									
+								if(HM.isincrit() && damaged_organs.len) //Crit damage boost
+									if(prob(15))
+										for(var/datum/organ/external/damagedorgan in damaged_organs)
+											if((damagedorgan.brute_dam) < damagedorgan.max_damage)
+												HM.apply_damage(4, BRUTE, damagedorgan)
+												HM.visible_message("<span class='warning'>The wounds on \the [HM]'s [damagedorgan.display_name] worsen terribly from being dragged!</span>")
+												add_logs(src, HM, "caused drag damage to", admin = (M.ckey))
+												HM.UpdateDamageIcon()
+									if(prob(8))
+										if(isturf(HM.loc))
+											blood_splatter(HM.loc,HM,1)
+											var/blood_volume = round(HM:vessel.get_reagent_amount("blood"))
+											if(blood_volume > 0)
+												HM:vessel.remove_reagent("blood",8)
+												HM.visible_message("<span class='danger'>\The [HM] loses a lot of blood from being dragged!</span>")
+												add_logs(src, HM, "caused drag damage bloodloss to", admin = (HM.ckey))
 					else
 						if (pulling)
 							pulling.Move(T, get_dir(pulling, T))
@@ -1497,7 +1534,7 @@ Thanks.
 	affect_silicon = 0 means that the flash won't affect silicons at all.
 
 */
-/mob/living/proc/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /obj/screen/fullscreen/flash)
+/mob/living/proc/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /obj/abstract/screen/fullscreen/flash)
 	if(override_blindness_check || !(disabilities & BLIND))
 		// flick("e_flash", flash)
 		overlay_fullscreen("flash", type)

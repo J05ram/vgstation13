@@ -309,6 +309,13 @@ var/global/num_vending_terminals = 1
 		return 1
 	return -1
 
+/obj/machinery/vending/npc_tamper_act(mob/living/L)
+	if(!panel_open)
+		togglePanelOpen(null, L)
+	if(wires)
+		wires.npc_tamper(L)
+
+
 /obj/machinery/vending/proc/can_accept_voucher(var/obj/item/voucher/voucher, mob/user)
 	if(istype(voucher, /obj/item/voucher/free_item))
 		var/obj/item/voucher/free_item/free_vouch = voucher
@@ -2092,6 +2099,7 @@ var/global/num_vending_terminals = 1
 		/obj/item/clothing/under/dress/plaid_red = 10,
 		/obj/item/clothing/under/dress/plaid_blue = 10,
 		/obj/item/clothing/under/greaser = 10,
+		/obj/item/clothing/under/sl_suit = 10,
 		)
 	contraband = list(
 		/obj/item/clothing/under/syndicate/tacticool = 5,
@@ -2126,6 +2134,7 @@ var/global/num_vending_terminals = 1
 	contraband = list(
 		/obj/item/clothing/shoes/jackboots = 5,
 		/obj/item/clothing/shoes/orange = 5,
+		/obj/item/clothing/shoes/laceup = 5,
 		)
 	premium = list(
 		/obj/item/clothing/shoes/rainbow = 1,
@@ -2401,9 +2410,13 @@ var/global/num_vending_terminals = 1
 	products = list (
 		/obj/item/weapon/storage/fancy/donut_box = 2,
 		/obj/item/clothing/suit/storage/trader = 3,
+		/obj/item/device/pda/trader = 3,
+		/obj/item/weapon/capsule = 60
 		)
 	prices = list(
-		/obj/item/clothing/suit/storage/trader = 100
+		/obj/item/clothing/suit/storage/trader = 100,
+		/obj/item/device/pda/trader = 100,
+		/obj/item/weapon/capsule = 10
 		)
 
 /obj/machinery/vending/trader/New()

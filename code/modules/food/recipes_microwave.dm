@@ -2041,6 +2041,18 @@
 		)
 	result = /obj/item/weapon/reagent_containers/food/condiment/gravy
 
+
+/datum/recipe/gravybig
+	reagents = list(WATER = 50)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chickenshroom,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chickenshroom,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chickenshroom,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chickenshroom,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chickenshroom
+		)
+	result = /obj/item/weapon/reagent_containers/food/condiment/gravy/gravybig
+
 /datum/recipe/sundayroast
 	reagents = list(GRAVY = 10,SODIUMCHLORIDE = 1, BLACKPEPPER = 1)
 	items = list(
@@ -2199,4 +2211,65 @@
 		)
 	result = /obj/item/weapon/reagent_containers/food/snacks/poutine
 
+/datum/recipe/poutinedangerous
+	reagents = list(GRAVY = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/poutine,
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/poutinedangerous
 
+/datum/recipe/poutinebarrel
+	reagents = list(GRAVY = 50)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/poutinedangerous,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinedangerous,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinedangerous,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinedangerous
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/poutinebarrel
+
+/datum/recipe/mapleleaf
+	reagents = list (SUGAR = 10, HONEY = 15)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/grown/aloe,
+		/obj/item/stack/sheet/snow
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/mapleleaf
+
+/datum/recipe/poutinesyrup
+	reagents = list (MAPLESYRUP = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/poutine
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/poutinesyrup
+
+/datum/recipe/poutineocean
+	reagents = list (GRAVY = 100)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel
+		)
+	result = /obj/structure/poutineocean
+
+/datum/recipe/poutinecitadel
+	reagents = list (MAPLESYRUP = 50)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel,
+		/obj/item/weapon/reagent_containers/food/snacks/poutinebarrel
+		)
+	result = /obj/structure/poutineocean/poutinecitadel
+
+
+/datum/recipe/mud_pie
+	reagents = list(WATER = 25)
+	items = list(
+		/obj/item/weapon/ore/glass,
+		/obj/item/weapon/ore/glass,
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/pie/mudpie
