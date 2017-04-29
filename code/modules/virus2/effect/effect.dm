@@ -188,6 +188,27 @@
 	if (mob.reagents.get_reagent_amount(GYRO) < 1)
 		mob.reagents.add_reagent(GYRO, 1)
 
+/datum/disease2/effect/bee_vomit
+	name = "Melisso-Emeto Syndrome"
+	stage = 1
+	max_multiplier = 10
+
+/datum/disease2/effect/bee_vomit/activate(var/mob/living/carbon/mob)
+	if (mob.reagents.get_reagent_amount(HONEY) < 10+multiplier*2)
+		mob.reagents.add_reagent(HONEY, 1)
+
+	if((mob.reagents.get_reagent_amount(HONEY)>= 10+multiplier*2) && prob(10))
+		if(prob(25))
+			to_chat(mob, "<span class='warning'>You feel a buzzing in your throat</span>")
+		spawn(5 SECONDS)
+			var/turf/simulated/T = get_turf(mob)
+			if(prob(30))
+				playsound(T, 'sound/effects/splat.ogg', 50, 1)
+				mob.visible_message("<span class='warning'>[mob] spits out a bee!</span>","<span class='danger'>You throw up a bee!</span>")
+				T.add_vomit_floor(mob, 1, 1, 1)
+			for(var/i = 0 to multiplier)
+				new/mob/living/simple_animal/bee(get_turf(mob))
+
 
 ////////////////////////STAGE 2/////////////////////////////////
 
@@ -461,6 +482,73 @@
 	to_chat(mob, "<span class='warning'>You feel terrible.</span>")
 	affect_voice_active = 0
 	..()
+
+
+/datum/disease2/effect/spiky_skin
+	name = "Porokeratosis Acanthus"
+	stage = 2
+	max_count = 1
+	var/skip = FALSE
+
+/datum/disease2/effect/spiky_skin/activate(var/mob/living/carbon/mob,var/multiplier)
+	if(ishuman(mob))
+		var/mob/living/carbon/human/H = mob
+		if(H.species && (H.species.anatomy_flags & NO_SKIN))	//Can't have spiky skin if you don't have skin at all.
+			skip = TRUE
+			return
+	to_chat(mob, "<span class='warning'>Your skin feels a little prickly.</span>")
+
+/datum/disease2/effect/spiky_skin/deactivate(var/mob/living/carbon/mob)
+	if(!skip)
+		to_chat(mob, "<span class='notice'>Your skin feels nice and smooth again!</span>")
+	..()
+
+/datum/disease2/effect/spiky_skin/on_touch(var/mob/living/carbon/mob, var/toucher, var/touched, var/touch_type)
+	if(!count || skip)
+		return
+	if(!istype(toucher, /mob) || !istype(touched, /mob))
+		return
+	var/datum/organ/external/E
+	var/mob/living/carbon/human/H
+	if(toucher == mob)	//we bumped into someone else
+		if(ishuman(touched))
+			H = touched
+	else	//someone else bumped into us
+		if(ishuman(toucher))
+			H = toucher
+	if(H)
+		var/list/have_checked = list()
+		while(!E || (E.status & ORGAN_ROBOT) || (E.status & ORGAN_PEG))
+			E = pick(H.organs)
+			if(!(E in have_checked))
+				have_checked.Add(E)
+			if(have_checked.len == H.organs.len)
+				E = null
+				break
+	if(toucher == mob)
+		if(E)
+			to_chat(mob, "<span class='warning'>As you bump into \the [touched], your spines dig into \his [E.display_name]!</span>")
+			E.take_damage(5)
+		else
+			to_chat(mob, "<span class='warning'>As you bump into \the [touched], your spines dig into \him!</span>")
+			var/mob/living/L = touched
+			if(istype(L) && !istype(L, /mob/living/silicon))
+				L.apply_damage(5)
+		var/mob/M = touched
+		add_attacklogs(mob, M, "damaged with keratin spikes",addition = "([mob] bumped into [M])", admin_warn = FALSE)
+	else
+		if(E)
+			to_chat(mob, "<span class='warning'>As \the [toucher] [touch_type == BUMP ? "bumps into" : "touches"] you, your spines dig into \his [E.display_name]!</span>")
+			to_chat(toucher, "<span class='danger'>As you [touch_type == BUMP ? "bump into" : "touch"] \the [mob], \his spines dig into your [E.display_name]!</span>")
+			E.take_damage(5)
+		else
+			to_chat(mob, "<span class='warning'>As \the [toucher] [touch_type == BUMP ? "bumps into" : "touches"] you, your spines dig into \him!</span>")
+			to_chat(toucher, "<span class='danger'>As you [touch_type == BUMP ? "bump into" : "touch"] \the [mob], \his spines dig into you!</span>")
+			var/mob/living/L = toucher
+			if(istype(L) && !istype(L, /mob/living/silicon))
+				L.apply_damage(5)
+		var/mob/M = touched
+		add_attacklogs(mob, M, "damaged with keratin spikes",addition = "([M] bumped into [mob])", admin_warn = FALSE)
 
 
 ////////////////////////STAGE 3/////////////////////////////////
@@ -935,14 +1023,11 @@ datum/disease2/effect/lubefoot/deactivate(var/mob/living/carbon/mob)
 	badness = 2
 
 /datum/disease2/effect/suicide/activate(var/mob/living/carbon/mob)
-	mob.suiciding = 1
-	//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
-	to_chat(viewers(mob), "<span class='danger'>[mob.name] is holding \his breath. It looks like \he's trying to commit suicide.</span>")
-	mob.adjustOxyLoss(175 - mob.getToxLoss() - mob.getFireLoss() - mob.getBruteLoss() - mob.getOxyLoss())
-	mob.updatehealth()
-	spawn(200) //in case they get revived by cryo chamber or something stupid like that, let them suicide again in 20 seconds
-		mob.suiciding = 0
 
+	if(mob.stat != CONSCIOUS || !mob.canmove || mob.restrained()) //Try as we might, we still can't snap our neck when we are KO or restrained, even if forced.
+		return
+
+	mob.attempt_suicide(1, 0)
 
 /datum/disease2/effect/killertoxins
 	name = "Toxification Syndrome"
@@ -1345,8 +1430,6 @@ datum/disease2/effect/lubefoot/deactivate(var/mob/living/carbon/mob)
 				H.species.anatomy_flags |= HAS_SWEAT_GLANDS
 		to_chat(mob, "<span class='notice'>Your skin feels nice and smooth again!</span>")
 	..()
-
-
 ////////////////////////SPECIAL/////////////////////////////////
 
 

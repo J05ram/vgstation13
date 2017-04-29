@@ -6,6 +6,7 @@
 
 	//for floors, use is_plating(), is_plasteel_floor() and is_light_floor()
 	var/intact = 1
+	var/turf_flags = 0
 
 	//properties for open tiles (/floor)
 	var/oxygen = 0
@@ -238,6 +239,8 @@
 /turf/proc/is_carpet_floor()
 	return 0
 /turf/proc/is_arcade_floor()
+	return 0
+/turf/proc/is_slime_floor()
 	return 0
 /turf/proc/is_mineral_floor()
 	return 0
@@ -489,7 +492,7 @@
 			M.take_damage(100, "brute")
 
 /turf/proc/Bless()
-	flags |= NOJAUNT
+	turf_flags |= NOJAUNT
 
 /////////////////////////////////////////////////////////////////////////
 // Navigation procs
@@ -721,3 +724,11 @@
 	.=..()
 
 	src.map_element = ME
+
+/turf/send_to_past(var/duration)
+	var/current_type = type
+	being_sent_to_past = TRUE
+	spawn(duration)
+		being_sent_to_past = FALSE
+		ChangeTurf(current_type)
+

@@ -948,6 +948,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_item(W, force_drop = 1)
 	W.forceMove(owner)
 
+/datum/organ/external/proc/skeletify()
+	if(istype(species, /datum/species/skellington))
+		return
+	owner.visible_message("<span class = 'warning'>The flesh falls off of \the [owner]'s [display_name]!</span>","<span class = 'warning'>The flesh is falling off of your [display_name]!</span>")
+	var/new_species_name
+	if(isvox(src))
+		new_species_name = "Skeletal Vox"
+	else
+		new_species_name = "Skellington"
+	var/datum/species/S = all_species[new_species_name]
+	species = new S.type
+	owner.update_body()
+
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
@@ -1542,3 +1555,27 @@ obj/item/weapon/organ/head/Destroy()
 		if(OE.grasp_id == index && OE.can_grasp)
 			return OE
 	return null
+
+/datum/organ/external/send_to_past(var/duration)
+	..()
+	var/static/list/resettable_vars = list(
+		"damage_state",
+		"brute_dam",
+		"burn_dam",
+		"last_dam",
+		"wounds",
+		"number_wounds",
+		"perma_injury",
+		"parent",
+		"children",
+		"internal_organs",
+		"open",
+		"stage",
+		"cavity",
+		"sabotaged",
+		"encased",
+		"implants")
+
+	reset_vars_after_duration(resettable_vars, duration)
+	for(var/datum/wound/W in wounds)
+		W.send_to_past(duration)

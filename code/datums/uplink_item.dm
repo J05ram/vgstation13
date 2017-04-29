@@ -181,6 +181,13 @@ var/list/uplink_items = list()
 	cost = 6
 	job = list("Clown", "Mime")
 
+/datum/uplink_item/jobspecific/invisible_spray
+	name = "Can of Invisible Spray"
+	desc = "Spray something to render it permanently invisible! One-time use. Permanence not guaranteed when exposed to water."
+	item = /obj/item/weapon/invisible_spray/permanent
+	cost = 5
+	job = list("Clown", "Mime")
+
 /datum/uplink_item/jobspecific/advancedmime
 	name = "Advanced Mime Gloves"
 	desc = "Grants the user the ability to periodically fire an invisible gun from their hands."
@@ -217,6 +224,13 @@ var/list/uplink_items = list()
 	desc = "Part of the notorious Ambrosia family, this species is nearly indistinguishable from Ambrosia Vulgaris. However, its branches contain a revolting toxin. Eight units are enough to drive victims insane after a three-minute delay."
 	item = /obj/item/seeds/ambrosiacruciatusseed
 	cost = 2
+	job = list("Botanist")
+
+/datum/uplink_item/jobspecific/beecase
+	name = "Briefcase Full of Bees"
+	desc = "A briefcase containing twenty angry bees."
+	item = /obj/item/weapon/storage/briefcase/bees
+	cost = 4
 	job = list("Botanist")
 
 //Chef
@@ -397,6 +411,12 @@ var/list/uplink_items = list()
 	name = "Energy Sword"
 	desc = "The esword is an edged weapon with a blade of pure energy. The sword is small enough to be pocketed when inactive. Activating it produces a loud, distinctive noise."
 	item = /obj/item/weapon/melee/energy/sword
+	cost = 8
+
+/datum/uplink_item/dangerous/machete
+	name = "High-Frequency Machete"
+	desc = "A broad blade used either as an implement or in combat. When inactive can be used as an powerful throwing weapon and when activated its damage is comparable to an Energy Sword."
+	item = /obj/item/weapon/melee/energy/hfmachete
 	cost = 8
 
 /datum/uplink_item/dangerous/emp
