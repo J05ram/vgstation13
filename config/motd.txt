@@ -1,11 +1,10 @@
-<h1>Welcome to NSS CASTRO!</h1>
+<h1>Welcome to NSS Cordelia</h1>
 <br>
-<i>HISPANISTATION CON MINISTATION HA VUELTO, HOME OF THE GRIEF SINCE 2013</i>
+<i>Actualmente estamos usando Taxi Station</i>
 <br>
 Canal de Discord: https://discord.gg/HgugjxV
-Normas: http://hispanistation.enjin.com/normas
+Normas: http://cordelia.enjin.com/
 Wiki: http://ss13.moe/wiki/index.php/Main_Page
 <br>
-Estamos usando el código de /vg/station el cual es un TG con esteroides, disfrutad!
+Estamos usando el cÃ³digo de /vg/station.
 <br>
-También estamos probando ministation devuelta, necesitaremos que reporten cualquier anomalia en el mapa para corregirla.
