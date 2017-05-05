@@ -1,5 +1,5 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-SERVERNAME [ES] Cordelia Station
+SERVERNAME <img src="http://i.imgur.com/D8Wbu0Y.gif">[ES] Hispanistation
 
 ## Alert levels
 ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
@@ -146,7 +146,7 @@ ALLOW_AI
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY Hessica
+HOSTEDBY Fidelius
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
@@ -159,16 +159,16 @@ GUEST_BAN
 # USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
-SERVER 45.76.89.116:5456
+SERVER 51.254.36.149:5456
 
 ## forum address
-FORUMURL http://cordelia.enjin.com/
+FORUMURL http://hispanistation.enjin.com/
 
 ## Wiki address
 WIKIURL http://ss13.moe/wiki/index.php/Main_Page
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-BANAPPEALS http://cordelia.enjin.com/
+BANAPPEALS http://hispanistation.enjin.com/unban
 
 ## In-game features
 ## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
@@ -185,7 +185,7 @@ LOAD_JOBS_FROM_TXT
 #POPUP_ADMIN_PM
 
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
-#ALLOW_HOLIDAYS
+ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
 TICKLAG 0.33
 
@@ -196,7 +196,7 @@ TICKCOMP 0
 SOCKET_TALK 0
 
 ## Uncomment this to ban use of ToR
-TOR_BAN
+#TOR_BAN
 
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
@@ -208,7 +208,7 @@ GATEWAY_DELAY 18000
 #ASSISTANT_MAINT
 
 ## Remove the # to enable assistant limiting.
-ASSISTANT_LIMIT
+#ASSISTANT_LIMIT
 
 ## If you enabled assistant limiting set the ratio of assistants to security members default is 2 assistants to 1 officer
 ASSISTANT_RATIO 2
