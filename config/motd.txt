@@ -1,10 +1,12 @@
 <h1>Welcome to NSS Cordelia</h1>
 <br>
-<i>Actualmente estamos usando Taxi Station</i>
+<i>Actualmente estamos usando Defficiency como mapa, para mas información consulten los holomapas dentro del juego.</i>
 <br>
 Canal de Discord: https://discord.gg/HgugjxV
 Normas: http://cordelia.enjin.com/
 Wiki: http://ss13.moe/wiki/index.php/Main_Page
+Foro: http://cordelia.enjin.com/
+Github: https://github.com/MattDuskson/vgstation13/tree/Hispa-vg
 <br>
 Estamos usando el código de /vg/station. Antes de empezar a jugar, asegúrate de haber leído las reglas.
 <br>
