@@ -8,7 +8,7 @@ pomf123 - unathi, diona
 * - vox
 * - diona
 * - plasmaman
-* - gray
+* - grey
 
 # Whitelist unathi for everyone IF they're a janitor:
 job=janitor - unathi
