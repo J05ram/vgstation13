@@ -1,5 +1,5 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-SERVERNAME [ES] Cordelia Station
+SERVERNAME [ES] Cordelia Station - Servidor Hispano
 
 ## Alert levels
 ALERT_GREEN Todas las alertas a la estación han pasado. Seguridad no debe andar armas visibles.
@@ -91,7 +91,7 @@ PROBABILITY SANDBOX 0
 PROBABILITY WIZARD 2
 PROBABILITY RESTRUCTURING 0
 PROBABILITY REVOLUTION 1
-PROBABILITY CHANGELING 2
+PROBABILITY CHANGELING 3
 PROBABILITY CULT 1
 PROBABILITY MONKEY 0
 PROBABILITY TRAITORCHAN 1
