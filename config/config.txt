@@ -202,7 +202,7 @@ TOR_BAN
 #AUTOMUTE_ON
 
 ## How long the delay is before the Away Mission gate opens. Default is half an hour.
-GATEWAY_DELAY 18000
+GATEWAY_DELAY 600
 
 ## Remove the # to give assistants maint access.
 #ASSISTANT_MAINT
@@ -258,7 +258,8 @@ PAPERWORK_LIBRARY
 ## Media URL.
 ## The base URL of your media library.  DO NOT ADD A SLASH AT THE END!
 ## NOTE that this must be publically-accessible.
-#MEDIA_BASE_URL http://yoursite.tld/media
+MEDIA_BASE_URL http://ss13.moe/media
+#MattD Testing don't mind me
 
 
 ##Dectalk SERVER
@@ -297,7 +298,7 @@ RENDERS_URL http://ss13.pomf.se/img/map-renders
 
 ## ENABLE_ROUNDSTART_AWAY_MISSIONS
 ## Uncomment to genereate an away mission at the beginning of each round
-#ENABLE_ROUNDSTART_AWAY_MISSIONS
+ENABLE_ROUNDSTART_AWAY_MISSIONS
 
 ## Error handling related options.
 ## The "cooldown" time for each occurrence of a unique error
