@@ -1,8 +1,8 @@
-<h1>Welcome to NSS Cordelia</h1>
+<h1>Bienvenido NSS Cordelia - Servidor hispano de SS13</h1>
 <br>
 <i>Actualmente estamos usando Defficiency como mapa, para mas información consulten los holomapas dentro del juego.</i>
 <br>
-Canal de Discord: https://discord.gg/HgugjxV
+Canal de Discord: https://discord.gg/Kf5rgjK
 Normas: http://cordelia.enjin.com/
 Wiki: http://ss13.moe/wiki/index.php/Main_Page
 Foro: http://cordelia.enjin.com/
