@@ -9,6 +9,7 @@
 	supervisors = "the captain"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons)
+	alt_titles = list("Botanist", "Barman", "Cook")
 	minimal_access = list(access_bar,access_weapons)
 
 	pdaslot=slot_belt
