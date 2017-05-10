@@ -6,7 +6,8 @@
 ######################################################################
 
 
-MattDuskson - Game Admin
-PromethTK11 - Game Admin
+MattDuskson - Game Master
+PromethTK11 - Game Master
 Hessica - Host
 Sombrahide - Trial Admin
+Atolondro - Trial Admin
