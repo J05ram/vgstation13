@@ -61,59 +61,6 @@
 
 
 
-/datum/job/warden
-	title = "Warden"
-	flag = WARDEN
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of security"
-	selection_color = "#ffeeee"
-	idtype = /obj/item/weapon/card/id/security
-	access = list(access_weapons, access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_eva)
-	minimal_access = list(access_weapons, access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
-	minimal_player_age = 7
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/warden
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec(H), slot_ears)
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger/sec(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/warden(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		//H.equip_or_collect(new /obj/item/device/pda/warden(H), slot_belt)
-		H.equip_or_collect(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		H.equip_or_collect(new /obj/item/clothing/glasses/sunglasses/sechud(H), slot_glasses)
-//		H.equip_or_collect(new /obj/item/clothing/mask/gas(H), slot_wear_mask) //Grab one from the armory you donk
-		H.equip_or_collect(new /obj/item/device/flash(H), slot_l_store)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-			H.put_in_hand(GRASP_LEFT_HAND, new /obj/item/weapon/handcuffs(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
-			H.equip_or_collect(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		var/datum/organ/external/affected = H.get_organ(LIMB_HEAD)
-		affected.implants += L
-		L.part = affected
-		return 1
-
-
-
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
@@ -127,7 +74,7 @@
 
 	access = list(access_weapons, access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court, access_eva)
 	minimal_access = list(access_weapons, access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
-	alt_titles = list("Forensic Technician","Gumshoe")
+	alt_titles = list("Forensic Technician","Gumshoe", "Private Investigator")
 
 	minimal_player_age = 7
 

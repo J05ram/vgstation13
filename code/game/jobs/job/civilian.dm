@@ -1,12 +1,12 @@
 //Food
 /datum/job/bartender
-	title = "Bartender"
+	title = "Service Spacialist"
 	flag = BARTENDER
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the captain"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons)
 	minimal_access = list(access_bar,access_weapons)
@@ -51,102 +51,6 @@
 		H.mutations += M_SOBER
 		H.check_mutations = 1
 
-		return 1
-
-
-
-/datum/job/chef
-	title = "Chef"
-	flag = CHEF
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
-	minimal_access = list(access_kitchen, access_morgue, access_bar)
-	alt_titles = list("Cook")
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/chef
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger(H), slot_back)
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_service(H), slot_ears)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/chef(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/suit/chef(H), slot_wear_suit)
-		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_or_collect(new /obj/item/clothing/head/chefhat(H), slot_head)
-		H.put_in_hands(new /obj/item/weapon/storage/bag/plasticbag(H))
-		//H.equip_or_collect(new /obj/item/device/pda/chef(H), slot_belt)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
-		return 1
-
-
-
-/datum/job/hydro
-	title = "Botanist"
-	flag = BOTANIST
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 3
-	spawn_positions = 2
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
-	minimal_access = list(access_hydroponics, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
-	alt_titles = list("Hydroponicist", "Beekeeper", "Gardener")
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/botanist
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_service(H), slot_ears)
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger/hyd(H), slot_back)
-		switch(H.mind.role_alt_title)
-			if("Hydroponicist")
-				H.equip_or_collect(new /obj/item/clothing/under/rank/hydroponics(H), slot_w_uniform)
-			if("Botanist")
-				H.equip_or_collect(new /obj/item/clothing/under/rank/botany(H), slot_w_uniform)
-			if("Beekeeper")
-				H.equip_or_collect(new /obj/item/clothing/under/rank/beekeeper(H), slot_w_uniform)
-			if("Gardener")
-				H.equip_or_collect(new /obj/item/clothing/under/rank/gardener(H), slot_w_uniform)
-
-		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_or_collect(new /obj/item/clothing/gloves/botanic_leather(H), slot_gloves)
-		H.equip_or_collect(new /obj/item/clothing/suit/apron(H), slot_wear_suit)
-		H.equip_or_collect(new /obj/item/device/analyzer/plant_analyzer(H), slot_s_store)
-		H.put_in_hands(new /obj/item/weapon/storage/bag/plasticbag(H))
-		//H.equip_or_collect(new /obj/item/device/pda/botanist(H), slot_belt)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
 		return 1
 
 
@@ -196,13 +100,13 @@
 
 
 /datum/job/cargo_tech
-	title = "Cargo Technician"
+	title = "Supply Tech"
 	flag = CARGOTECH
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the quartermaster and the head of personnel"
+	supervisors = "the quartermaster"
 	selection_color = "#dddddd"
 	idtype = /obj/item/weapon/card/id/supply
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station, access_taxi)
@@ -235,50 +139,6 @@
 			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
 		return 1
 
-
-
-/datum/job/mining
-	title = "Shaft Miner"
-	flag = MINER
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 3
-	spawn_positions = 3
-	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#dddddd"
-	idtype = /obj/item/weapon/card/id/supply
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station)
-	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting)
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/shaftminer
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_mining(H), slot_ears)
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_eng(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger/engi(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/miner(H), slot_w_uniform)
-		//H.equip_or_collect(new /obj/item/device/pda/shaftminer(H), slot_belt)
-		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
-//		H.equip_or_collect(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new /obj/item/weapon/storage/box/survival/engineer(H))
-			H.put_in_hands(new /obj/item/weapon/crowbar(H))
-			H.equip_or_collect(new /obj/item/weapon/storage/bag/ore(H), slot_l_store)
-		else
-			H.equip_or_collect(new /obj/item/weapon/storage/box/survival/engineer(H.back), slot_in_backpack)
-			H.equip_or_collect(new /obj/item/weapon/crowbar(H), slot_in_backpack)
-			H.equip_or_collect(new /obj/item/weapon/storage/bag/ore(H), slot_in_backpack)
-		return 1
 
 /datum/job/clown
 	title = "Clown"
@@ -323,176 +183,6 @@
 		H.real_name = pick(clown_names)
 		H.dna.real_name = H.real_name
 		H.rename_self("clown")
-		return 1
-
-
-
-/datum/job/mime
-	title = "Mime"
-	flag = MIME
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	idtype = /obj/item/weapon/card/id/mime
-	access = list(access_mime, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_mime, access_theatre)
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/mime
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/mime(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/shoes/mime(H), slot_shoes)
-		//H.equip_or_collect(new /obj/item/device/pda/mime(H), slot_belt)
-		H.equip_or_collect(new /obj/item/clothing/gloves/white(H), slot_gloves)
-		H.equip_or_collect(new /obj/item/clothing/mask/gas/mime(H), slot_wear_mask)
-		H.equip_or_collect(new /obj/item/clothing/head/beret(H), slot_head)
-		H.equip_or_collect(new /obj/item/clothing/suit/suspenders(H), slot_wear_suit)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-			H.equip_or_collect(new /obj/item/toy/crayon/mime(H), slot_l_store)
-			H.put_in_hands(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
-			H.equip_or_collect(new /obj/item/toy/crayon/mime(H), slot_in_backpack)
-			H.equip_or_collect(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_in_backpack)
-		H.add_spell(new /spell/aoe_turf/conjure/forcewall/mime, "grey_spell_ready")
-		H.add_spell(new /spell/targeted/oathbreak/)
-		H.miming = 1
-		H.rename_self("mime")
-		return 1
-
-//Mime's break vow spell, couldn't think of anywhere else to put this
-
-/spell/targeted/oathbreak
-	name = "Break Oath of Silence"
-	desc = "Break your oath of silence."
-	school = "mime"
-	panel = "Mime"
-	charge_max = 10
-	spell_flags = INCLUDEUSER
-	range = 0
-	max_targets = 1
-
-	hud_state = "mime_oath"
-	override_base = "const"
-
-/spell/targeted/oathbreak/cast(list/targets)
-	for(var/mob/living/carbon/human/M in targets)
-		var/response = alert(M, "Are you -sure- you want to break your oath of silence?\n(This removes your ability to create invisible walls and cannot be undone!)","Are you sure you want to break your oath?","Yes","No")
-		if(response != "Yes")
-			return
-		M.miming=0
-		for(var/spell/aoe_turf/conjure/forcewall/mime/spell in M.spell_list)
-			M.remove_spell(spell)
-		for(var/spell/targeted/oathbreak/spell in M.spell_list)
-			M.remove_spell(spell)
-		message_admins("[M.name] ([M.ckey]) has broken their oath of silence. (<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</a>)")
-		to_chat(M, "<span class = 'notice'>An unsettling feeling surrounds you...</span>")
-		return
-
-/datum/job/janitor
-	title = "Janitor"
-	flag = JANITOR
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_janitor, access_maint_tunnels)
-	minimal_access = list(access_janitor, access_maint_tunnels)
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/janitor
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/janitor(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.put_in_hands(new /obj/item/weapon/storage/bag/plasticbag(H))
-		//H.equip_or_collect(new /obj/item/device/pda/janitor(H), slot_belt)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
-		// Now spawns on the janikart.  H.equip_or_collect(new /obj/item/key(H), slot_l_store)
-		return 1
-
-
-
-//More or less assistants
-/datum/job/librarian
-	title = "Librarian"
-	flag = LIBRARIAN
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_library, access_maint_tunnels)
-	minimal_access = list(access_library)
-	alt_titles = list("Journalist", "Game Master")
-
-	pdaslot=slot_belt
-	pdatype=/obj/item/device/pda/librarian
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)
-			return 0
-		switch(H.backbag)
-			if(2)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			if(4)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-			if(5)
-				H.equip_or_collect(new /obj/item/weapon/storage/backpack/messenger(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/suit_jacket/red(H), slot_w_uniform)
-		//H.equip_or_collect(new /obj/item/device/pda/librarian(H), slot_belt)
-		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		var/obj/item/weapon/storage/bag/plasticbag/P = new /obj/item/weapon/storage/bag/plasticbag(H)
-		H.put_in_hands(P)
-		new /obj/item/weapon/barcodescanner(P)
-		if(H.backbag == 1)
-			H.put_in_hand(GRASP_RIGHT_HAND, new H.species.survival_gear(H))
-		else
-			H.equip_or_collect(new H.species.survival_gear(H.back), slot_in_backpack)
-		var/list/new_languages = list()
-		for(var/L in all_languages)
-			var/datum/language/lang = all_languages[L]
-			if(~lang.flags & RESTRICTED && !(lang in H.languages))
-				new_languages += lang.name
-
-		var/picked_lang = pick(new_languages)
-		H.add_language(picked_lang)
-		to_chat(H, "<span class = 'notice'>Due to your well read nature, you find yourself versed in the language of [picked_lang]. Check-Known-Languages under the IC tab to use it.</span>")
 		return 1
 
 
