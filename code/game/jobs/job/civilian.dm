@@ -1,6 +1,6 @@
 //Food
 /datum/job/bartender
-	title = "Service Spacialist"
+	title = "Service Specialist"
 	flag = BARTENDER
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -10,7 +10,7 @@
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons)
 	alt_titles = list("Botanist", "Barman", "Cook")
-	minimal_access = list(access_bar,access_weapons)
+	minimal_access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons)
 
 	pdaslot=slot_belt
 	pdatype=/obj/item/device/pda/bar
@@ -111,7 +111,8 @@
 	selection_color = "#dddddd"
 	idtype = /obj/item/weapon/card/id/supply
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station, access_taxi)
-	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_taxi)
+	alt_titles = list("Cargo Technician", "Shaft Miner")
+	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station, access_taxi)
 
 	pdaslot=slot_belt
 	pdatype=/obj/item/device/pda/cargo

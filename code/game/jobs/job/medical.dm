@@ -59,7 +59,7 @@
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
 	access = list(access_paramedic,access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva, access_science, access_eva)
-	minimal_access = list(access_medical, access_morgue, access_surgery, access_virology)
+	minimal_access = list(access_paramedic,access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva, access_science, access_eva)
 	alt_titles = list("Surgeon", "Emergency Physician", "Nurse","Chemist", "Virologist","Genetist")
 
 	pdaslot=slot_belt

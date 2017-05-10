@@ -57,7 +57,7 @@
 	selection_color = "#ffeeff"
 	idtype = /obj/item/weapon/card/id/research
 	access = list(access_robotics, access_rnd, access_tox_storage, access_science, access_xenobiology, access_tech_storage, access_morgue)
-	minimal_access = list(access_rnd, access_tox_storage, access_science, access_xenobiology)
+	minimal_access = list(access_robotics, access_rnd, access_tox_storage, access_science, access_xenobiology, access_tech_storage, access_morgue)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Plasma Researcher", "Xenobiologist", "Research Botanist", "Robocist")
 
 	pdaslot=slot_belt

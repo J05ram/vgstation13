@@ -598,7 +598,7 @@
 	registered_name = "Medic"
 	icon_state = "medical"
 	desc = "A card covered in the blood stains of the wild ride."
-	access = list(access_medical, access_genetics, access_morgue, access_chemistry, access_paramedic, access_virology, access_surgery, access_cmo)
+	access = list(access_paramedic,access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva, access_science, access_eva)
 
 /obj/item/weapon/card/id/security
 	name = "Security ID"
@@ -612,21 +612,21 @@
 	registered_name = "Scientist"
 	icon_state = "research"
 	desc = "The pinnacle of name technology."
-	access = list(access_science, access_rnd, access_tox_storage, access_robotics, access_xenobiology, access_rd)
+	access = list(access_robotics, access_rnd, access_tox_storage, access_science, access_xenobiology, access_tech_storage, access_morgue)
 
 /obj/item/weapon/card/id/supply
 	name = "Supply ID"
 	registered_name = "Cargonian"
 	icon_state = "cargo"
 	desc = "ROH ROH! HEIL THE QUARTERMASTER!"
-	access = list(access_mailsorting, access_mining, access_mining_station, access_cargo, access_qm, access_taxi)
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station, access_taxi)
 
 /obj/item/weapon/card/id/engineering
 	name = "Engineering ID"
 	registered_name = "Engineer"
 	icon_state = "engineering"
 	desc = "Shame it's going to be lost in the void of a black hole."
-	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva, access_construction)
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mechanic, access_tcomsat, access_science)
 
 /obj/item/weapon/card/id/hos
 	name = "Head of Security ID"
