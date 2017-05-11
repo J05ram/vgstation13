@@ -11,10 +11,10 @@ PORT 3306
 DATABASE tgstation
 
 # Username/Login used to access the database
-LOGIN mylogin
+LOGIN root
 
 # Password used to access the database
-PASSWORD mypassword
+PASSWORD toor
 
 # The following information is for feedback tracking via the blackbox server
 FEEDBACK_DATABASE test
