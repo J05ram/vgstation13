@@ -11,7 +11,7 @@ Medical Specialist=5
 
 Scientist=3
 
-Service Specialist=4
+Service Specialist=5
 
 Supply Technician=3
 
