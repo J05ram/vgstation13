@@ -9,7 +9,7 @@
 	selection_color = "#dddddd"
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
-	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Security Cadet", "Librarian")
+	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Security Cadet", "Librarian", "Janitor")
 
 	no_random_roll = 1 //Don't become assistant randomly
 
